@@ -21,7 +21,10 @@ const App = () => {
   });
 
   const isUserAuthenticated = (data) => {
-    if (data) setUserDetails(data.user);
+    if (data) { 
+      localStorage.setItem('user', data.user.username);
+      setUserDetails(data.user);
+    };
     setIsAuthenticated(true);
   }
 
@@ -35,6 +38,15 @@ const App = () => {
     setIsAuthenticated(false);
   }
 
+  const onMount = () => {
+    setUserDetails({
+      ...userDetails,
+      username: localStorage.getItem('user')
+
+    })
+  };
+
+  useEffect(onMount, []);
   return (
     <div className="wrapper">
       {isAuthenticated ? <Header userDetails={userDetails}/> : null}

@@ -14,3 +14,31 @@ export const allUsers = async () => {
         return ({ status: 500, message: error })
     }
 };
+
+export const updateUsers = async (req) => {
+    try {
+        const userList = req.body;
+
+        for (const item of userList) {
+            const user_id = item._id;
+            const udpate = await User.findByIdAndUpdate(
+                user_id,
+                {
+                    username: item.username,
+                    email: item.email,
+                    firstname: item.firstname,
+                    lastname: item.lastname,
+                    role: item.role,
+                },
+                {
+                    returnOriginal: false
+                }
+            )
+            console.log(udpate);
+        }
+      
+        return ({ status: 200, message: 'Successfull' })
+    } catch (error) {
+        return ({ status: 500, message: error.message })
+    }
+}

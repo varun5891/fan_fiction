@@ -14,6 +14,7 @@ const User = mongoose.model(
     registrationdate: Date,
     lastlogindate: Date,
     role: String,
+    rating: String,
     roles: [
       {
         type: mongoose.Schema.Types.ObjectId,

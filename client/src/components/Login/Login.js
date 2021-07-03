@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -96,8 +96,14 @@ const Login = (props) => {
     })
   };
 
+  
   const disableSubmit = userData.username === null || userData.password === null;
 
+  const onMount = () => {
+    localStorage.removeItem('user');
+  };
+
+  useEffect(onMount, []);
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />

@@ -13,8 +13,8 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { signup } from '../../Services/Login/Login_Service';
-import { useHistory } from 'react-router-dom'
-import Swal from 'sweetalert2';;
+import { useHistory } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -37,33 +37,33 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SignUp() {
-  
+
   const [userDetails, setUserDetails] = React.useState({
-      username: '',
-      email: '',
-      password: '',
-      firstname: '',
-      lastname: '',
-      lastlogindate: null,
-      registrationdate: new Date(),
-      status: true
+    username: '',
+    email: '',
+    password: '',
+    firstname: '',
+    lastname: '',
+    lastlogindate: null,
+    registrationdate: new Date(),
+    status: true
   });
   const history = useHistory();
   const classes = useStyles();
 
-  const disableSubmit = userDetails.username === '' || userDetails.email === '' || userDetails.password === '' || userDetails.firstname === '' || userDetails.lastname === '';
+  const disableSubmit = userDetails.username === '' || userDetails.username.toUpperCase() === 'ADMIN' || userDetails.email === '' || userDetails.password === '' || userDetails.firstname === '' || userDetails.lastname === '';
 
   const onUserDetailChange = (e) => {
     setUserDetails({
       ...userDetails,
       [e.target.name]: e.target.value
     })
+
   }
 
   const onHandleSubmit = () => {
-  
-     signup(userDetails).then( resp => {
-      if(resp.data.status === 200){
+    signup(userDetails).then(resp => {
+      if (resp.data.status === 200) {
         Swal.fire({
           icon: 'success',
           title: 'Signed Up',

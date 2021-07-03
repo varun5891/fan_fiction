@@ -2,13 +2,13 @@ import express from 'express';
 import router from './server/routes/index.js';
 import userRoutes from './server/routes/user.routes.js';
 import authRoutes from './server/routes/auth.routes.js';
+import workRoute from './server/routes/work.routes.js';
+import preferenceRoute from './server/routes/preference.routes.js';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import db from './server/models/index.js';
 import dotenv from "dotenv";
 dotenv.config();
-import { Server } from 'socket.io';
-import { createServer } from 'http';
 
 const app = express();
 
@@ -35,7 +35,9 @@ app.use(function (req, res, next) {
 
 app.use('/', router);
 app.use('/api/user', userRoutes);
-app.use('/api/auth', authRoutes)
+app.use('/api/auth', authRoutes);
+app.use('/api/work', workRoute);
+app.use('/api/preference', preferenceRoute);
 
 //For Database Connection
 const Role = db.role;
