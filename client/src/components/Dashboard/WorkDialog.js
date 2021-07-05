@@ -75,7 +75,7 @@ export default function WorkDialog(props) {
 
   const onMount = () => {
     getUserWork(loggedInUser.username).then(resp => {
-      if (resp.data.status === 200) {
+      if (resp.data.status === 200 && resp.data.userWork.length >= 0) {
         setUserWork(resp.data.userWork[0]);
       } else {
         Swal.fire({
